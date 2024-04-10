@@ -1,9 +1,10 @@
 import { createContext, useState } from "react";
-import { formatStats } from "../helpers/pokemon,js";
-import { formatTypes } from "../helpers/pokemon,js";
-import { formatAbilities } from "../helpers/pokemon,js";
-import { getPokemonDescription } from "../helpers/pokemon,js";
-import { getEvolutions } from "../helpers/pokemon,js";
+import { formatStats } from "../helpers/pokemon.js";
+import { formatTypes } from "../helpers/pokemon.js";
+import { formatAbilities } from "../helpers/pokemon.js";
+import { getPokemonDescription } from "../helpers/pokemon.js";
+import { getEvolutions } from "../helpers/pokemon.js";
+import { getImageByPokemon } from "../helpers/pokemon.js";
 import axios from "axios";
 
 const PokemonContext = createContext();
@@ -19,7 +20,7 @@ const showPokemon = async (pokemonInfo) => {
     );
 
     const {id, name, height, weight, stats, types, abilities } = pokemonInfo;
-
+    const evolutions = await getEvolutions(dataEvolution)
     setPokemonDetail({
         id,
         name,
@@ -29,7 +30,8 @@ const showPokemon = async (pokemonInfo) => {
         types: formatTypes(types),
         abilities: formatAbilities(abilities),
         description: getPokemonDescription(dataSpecies),
-        evolutions: getEvolutions(dataEvolution),
+        evolutions,
+        image: getImageByPokemon(pokemonInfo.sprites),
     });
     setShowDetailPokemon(true)
 };
