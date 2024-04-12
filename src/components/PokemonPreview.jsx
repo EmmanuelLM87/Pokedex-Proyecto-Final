@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { colorByType } from "../constants/pokemon";
+import { IconHeartFilled } from "@tabler/icons-react";
 
 const PokemonPreview = ({ pokemonURL, onClick }) => {
   const [pokemon, setPokemon] = useState(null);
